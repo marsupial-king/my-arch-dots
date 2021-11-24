@@ -1,0 +1,37 @@
+#! /bin/sh
+source ~/.zshrc
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+
+bspc config border_width         0
+bspc config window_gap          12
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+bspc config ignore_ewmh_focus true
+
+bspc rule -a Chromium desktop='^2' follow=on
+bspc rule -a firefox desktop='^3' follow=off state=tiled
+bspc rule -a discord desktop='^4' follow=off
+bspc rule -a Discord desktop='^4' follow=off
+bspc rule -a Zathura desktop='^7' state=tiled follow=on
+bspc rule -a libreoffice-startcenter desktop='^9'
+bspc rule -a libreoffice-writer desktop='^9'
+bspc rule -a libreoffice-calc desktop='^9'
+bspc rule -a libreoffice-math desktop='^9'
+bspc rule -a Steam desktop='^10' follow=off
+
+
+#start pywal, set wallpaper
+~/walstart.sh
+
+#start polybar
+polybar main &
+
+#startup applications
+discord &
+firefox &

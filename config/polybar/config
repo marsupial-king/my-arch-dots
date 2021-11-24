@@ -1,0 +1,284 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+
+backgroundt = ${env:color_background}
+background = ${xrdb:background}
+foreground = ${xrdb:foreground}
+color0 = ${xrdb:color0}
+color1 = ${xrdb:color1}
+color2 = ${xrdb:color2}
+color3 = ${xrdb:color3}
+color4 = ${xrdb:color4}
+color5 = ${xrdb:color5}
+color6 = ${xrdb:color6}
+color8 = ${xrdb:color8}
+color9 = ${xrdb:color9}
+color10 = ${xrdb:color10}
+color11 = ${xrdb:color11}
+color12 = ${xrdb:color12}
+color13 = ${xrdb:color13}
+color14 = ${xrdb:color14}
+color15 = ${xrdb:color15}
+
+
+[bar/main]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 40
+offset-x = 0%
+offset-y = 0%
+fixed-center = true
+border-size = 5
+border-color = ${colors.background}
+wm-restack = bspwm
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+font-0 = mononokiNerdFont:size=12
+
+line-size = 3
+modules-left = filesystem memory cpu temperature network
+modules-center = bspwm
+modules-right = weather pulseaudio aur date menu
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = 
+label-focused-foreground = ${colors.foreground}
+label-focused-padding = 2
+
+label-occupied = 
+label-occupied-padding = 2
+
+label-empty = 
+label-empty-foreground = ${colors.color3}
+label-empty-padding= 2
+
+label-separator = |
+label-separator-foreground = ${colors.color10}
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = %Y-%m-%d
+
+time = %H:%M
+
+format-prefix = " "
+format-prefix-foreground = ${colors.background}
+format-background = ${colors.color10}
+format-underline = ${colors.background}
+format-overline = ${colors.background}
+format-padding = 2
+
+label = %date% %time%
+label-foreground = ${colors.background}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume><ramp-volume>
+label-volume = VOL %percentage%%
+label-volume-foreground = ${colors.background}
+label-volume-background = ${colors.color6}
+label-volume-padding-right = 1
+label-volume-padding-left = 2
+label-volume-underline = ${colors.background}
+label-volume-overline = ${colors.background}
+label-muted =  muted
+label-muted-foreground = #666
+label-muted-padding = 2
+
+ramp-volume-spacing = 0
+ramp-volume-underline = ${colors.background}
+ramp-volume-overline = ${colors.background}
+ramp-volume-foreground = ${colors.background}
+ramp-volume-background = ${colors.color6}
+ramp-volume-0 =  
+ramp-volume-1 =  
+ramp-volume-padding-right = 2
+
+[module/cpu]
+type = internal/cpu
+interval = .5
+format-prefix = " "
+format-prefix-foreground = ${colors.background}
+format-underline = ${colors.background}
+format = <label> <ramp-coreload>
+format-background = ${colors.color9}
+label-foreground = ${colors.background}
+format-overline = ${colors.background}
+; Available tokens:
+;   %percentage% (default) - total cpu load averaged over all cores
+;   %percentage-sum% - Cumulative load on all cores
+;   %percentage-cores% - load percentage for each core
+;   %percentage-core[1-9]% - load percentage for specific core
+label = %percentage%%
+
+; Spacing between individual per-core ramps
+ramp-coreload-spacing = 0
+
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+format-padding = 2
+
+
+[module/memory]
+type = internal/memory
+interval = 1
+format = <label> <bar-used>
+format-prefix = " "
+format-background = ${colors.color10}
+format-prefix-foreground = ${colors.background}
+format-underline = ${colors.background}
+format-overline = ${colors.background}
+label = %percentage_used%%
+label-foreground = ${colors.background}
+
+bar-used-indicator =
+bar-used-width = 15
+bar-used-foreground-0 = ${colors.background}
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = ${colors.foreground}
+format-padding = 2
+
+[module/memory2]
+type = internal/memory
+interval = 0.2
+format = <label> <bar-used>
+format-overline = ${colors.background}
+
+format-prefix = " "
+format-prefix-foreground = ${colors.background}
+format-underline = ${colors.background}
+format-background = ${colors.color10}
+label-foreground = ${colors.background}
+bar-used-width = 20
+bar-used-gradient = true
+bar-used-foreground-0 = #449f3d
+bar-used-foreground-1 = #2f8419
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ed5456
+bar-used-indicator = █
+bar-used-indicator-font = 5
+bar-used-indicator-foreground = ${colors.foreground}
+bar-used-fill = █
+bar-used-fill-font = 5
+bar-used-empty = █
+bar-used-empty-font = 5
+bar-used-empty-foreground = ${colors.color8}
+format-padding = 2
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted = : %percentage_used%%
+label-mounted-foreground = ${colors.background}
+label-mounted-background = ${colors.color12}
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.color0}
+label-mounted-overline = ${colors.background}
+label-mounted-underline = ${colors.background}
+label-mounted-padding = 2
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+label-padding-right = 20
+
+[module/aur]
+type = custom/script
+exec = pacman -Qu | wc -l
+interval = 60
+label = Aur: %output%
+format-foreground = ${colors.background}
+format-background = ${colors.color9}
+format-prefix = " "
+format-prefix-foreground = ${colors.background}
+format-padding = 2
+format-underline = ${colors.background}
+format-overline = ${colors.background}
+
+
+[module/temperature]
+type = custom/script
+exec = ~/.config/polybar/scripts/avg_temp.sh
+format-foreground = ${colors.background}
+format-background = ${colors.color6}
+format-padding = 2
+format-underline = ${colors.background}
+format-overline = ${colors.background}
+interval = 1
+
+[module/network]
+type = internal/network
+interface = eno2
+interval = 1.0
+label-connected = " %downspeed%  %upspeed%"
+label-connected-foreground = ${colors.background}
+label-connected-underline = ${colors.background}
+label-connected-overline = ${colors.background}
+label-connected-background = ${colors.color5}
+label-connected-padding = 2
+label-disconnected = disconnected
+
+[module/weather]
+type = custom/script
+exec = python ~/.config/polybar/scripts/weather.py
+interval = 600
+format-foreground = ${colors.background}
+format-background = ${colors.color5}
+format-padding = 2
+format-underline = ${colors.background}
+format-overline = ${colors.background}
+
+[module/menu]
+type = custom/menu
+expand-right = true
+
+label-open =  Power
+label-close = X
+label-separator = |
+format-spacing = 1
+
+menu-0-0 = Shutdown
+menu-0-0-exec = systemctl poweroff
+menu-0-1 = Reboot
+menu-0-1-exec = systemctl reboot
+
+format-padding = 2
+format-foreground = ${colors.background}
+format-overline = ${colors.background}
+format-underline = ${colors.background}
+format-background = ${colors.color12}
