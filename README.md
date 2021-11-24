@@ -4,7 +4,7 @@ I've selected 30 wallpapers that I think go well with pywal. Of course you can u
 ### Wallpapers with pywal colorscheme:
 ![](rice.gif)
 
-### Rofi Example
+### Rofi Example:
 ![](example.png)
 
 Credits for moonphase script [here](https://gist.github.com/miklb/ed145757971096565723)
