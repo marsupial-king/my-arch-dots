@@ -1,3 +1,8 @@
+"""
+moonphase.py - Calculate Lunar Phase
+Author: Sean B. Palmer, inamidst.com
+Cf. http://en.wikipedia.org/wiki/Lunar_phase#Lunar_phase_calculation
+"""
 import math, decimal, datetime
 dec = decimal.Decimal
 
